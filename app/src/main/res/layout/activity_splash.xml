@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/logo4"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/appname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Healthy Reminder System"
+        android:layout_below="@id/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(Elder Caring)"
+        android:layout_below="@id/appname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:textSize="16sp"
+        android:textColor="@color/transparent_gray"
+        android:fontFamily="sans-serif" />
+
+</RelativeLayout>

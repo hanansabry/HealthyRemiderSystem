@@ -9,4 +9,7 @@
     <color name="text_gray">#9B9B9B</color>
     <color name="yellow">#FFE501</color>
     <color name="transparent_gray">#F7F7F7</color>
+    <color name="green">#00cd0a</color>
+    <color name="yellow2">#ffd200</color>
+    <color name="red">#ff0000</color>
 </resources>

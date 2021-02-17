@@ -9,23 +9,18 @@ import android.os.Bundle;
 
 import com.app.healthyremidersystem.R;
 
-public class LoginActivity extends AppCompatActivity {
+public class AddMedicineReminderActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_add_medicine_reminder);
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.btnLogin)
-    public void onLoginClicked() {
-        startActivity(new Intent(this, MainActivity.class));
-    }
-
-    @OnClick(R.id.btnRegister)
-    public void onRegisterClicked() {
-        startActivity(new Intent(this, RegisterActivity.class));
+    @OnClick(R.id.btnAllReminders)
+    public void onAllRemindersClicked() {
+        startActivity(new Intent(this, AllMedicinesRemindersActivity.class));
     }
 
     @OnClick(R.id.btnBack)

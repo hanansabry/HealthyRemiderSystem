@@ -99,6 +99,7 @@
                     android:background="@drawable/corner_light_gray"
                     android:gravity="bottom"
                     android:hint="Email"
+                    android:inputType="textEmailAddress"
                     android:padding="16dp"
                     android:textSize="14sp"
                     android:textColor="@color/colorPrimary"

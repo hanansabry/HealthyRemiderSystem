@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_gradient"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".presentation.AddMedicineReminderActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:background="@null"
+            android:src="@drawable/ic_back_white" />
+
+        <Button
+            android:id="@+id/btnAllReminders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="See All Reminders"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:background="@null"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:tint="@color/colorPrimary"
+            android:src="@drawable/ic_back_white" />
+    </RelativeLayout>
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_welcome"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textStyle="bold"-->
+<!--        android:text="Set Medicine Reminder"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:fontFamily="sans-serif-light"-->
+<!--        android:textSize="22sp" />-->
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="64dp"
+        app:cardCornerRadius="24dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Medicine Reminder"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:padding="12dp"
+                    android:textSize="20sp"/>
+
+                <EditText
+                    android:id="@+id/editTextMedicineName"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/corner_light_gray"
+                    android:gravity="center_vertical"
+                    android:hint="Medicine Name"
+                    android:inputType="textPersonName"
+                    android:padding="16dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/text_gray" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextMedicineImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/corner_light_gray"
+                    android:gravity="bottom"
+                    android:hint="Set medicine image"
+                    android:inputType="textUri"
+                    android:padding="16dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/text_gray" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/corner_light_gray"
+                    android:gravity="bottom"
+                    android:hint="Number of days"
+                    android:inputType="number"
+                    android:padding="16dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/text_gray" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/corner_light_gray"
+                    android:gravity="bottom"
+                    android:hint="Number per day"
+                    android:inputType="number"
+                    android:padding="16dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/text_gray" />
+
+                <Button
+                    android:id="@+id/btnRegister"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/cornered_accent_bg_fill"
+                    android:text="Add Schedule"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    tools:listitem="@layout/time_scheduled_item"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

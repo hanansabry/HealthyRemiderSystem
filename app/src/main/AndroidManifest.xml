@@ -14,11 +14,11 @@
         <activity android:name=".presentation.HospitalAppointmentActivity" />
         <activity android:name=".presentation.HealthAdviceActivity" />
         <activity android:name=".presentation.WeeklyReportActivity" />
-        <activity android:name=".presentation.MedicineReminderActivity" />
+        <activity android:name=".presentation.AddMedicineReminderActivity" />
         <activity android:name=".presentation.LoginActivity" />
         <activity android:name=".presentation.RegisterActivity" />
         <activity android:name=".presentation.StartActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".presentation.MainActivity" />
         <activity
             android:name=".presentation.SplashActivity"
             android:noHistory="true">

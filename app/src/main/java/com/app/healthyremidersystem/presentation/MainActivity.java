@@ -1,4 +1,4 @@
-package com.app.healthyremidersystem;
+package com.app.healthyremidersystem.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.ButterKnife;
@@ -12,7 +12,7 @@ import com.app.healthyremidersystem.presentation.AllMedicinesRemindersActivity;
 import com.app.healthyremidersystem.presentation.DrinkingWaterActivity;
 import com.app.healthyremidersystem.presentation.HealthAdviceActivity;
 import com.app.healthyremidersystem.presentation.HospitalAppointmentActivity;
-import com.app.healthyremidersystem.presentation.MedicineReminderActivity;
+import com.app.healthyremidersystem.presentation.AddMedicineReminderActivity;
 import com.app.healthyremidersystem.presentation.WeeklyReportActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.medicineReminderCardView)
     public void onMedicineReminderClicked() {
-        startActivity(new Intent(this, MedicineReminderActivity.class));
+        startActivity(new Intent(this, AddMedicineReminderActivity.class));
     }
 
     @OnClick(R.id.weeklyReportCardView)

@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 public interface MedicineRepository {
 
-    void addMedicineReminder(Medicine medicine, MutableLiveData<Boolean> success);
-    void retrieveAllMedicinesReminders(MutableLiveData<List<Medicine>> medicines);
+    void addMedicineReminder(String userId, Medicine medicine, MutableLiveData<Boolean> success);
+    void retrieveAllMedicinesReminders(String userId, MutableLiveData<List<Medicine>> medicines);
+    void removeMedicine(String userId, String medicineId, MutableLiveData<Boolean> success);
 }

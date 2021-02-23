@@ -2,9 +2,11 @@ package com.app.healthyremidersystem.presentation.viewmodels;
 
 import com.app.healthyremidersystem.Injection;
 import com.app.healthyremidersystem.domain.usecases.AddMedicineReminderUseCase;
+import com.app.healthyremidersystem.domain.usecases.RemoveMedicineUseCase;
 import com.app.healthyremidersystem.model.Medicine;
 import com.app.healthyremidersystem.model.ScheduledTime;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.lifecycle.MutableLiveData;
@@ -13,7 +15,9 @@ import androidx.lifecycle.ViewModel;
 public class AddMedicineReminderViewModel extends ViewModel {
 
     private AddMedicineReminderUseCase addMedicineReminderUseCase;
+    private RemoveMedicineUseCase removeMedicineUseCase;
     private MutableLiveData<Boolean> success = new MutableLiveData<>();
+    private MutableLiveData<Boolean> removeSuccess = new MutableLiveData<>();
     private MutableLiveData<String> medicineNameError = new MutableLiveData<>();
     private MutableLiveData<String> daysNumberError = new MutableLiveData<>();
     private MutableLiveData<String> numPerDayError = new MutableLiveData<>();
@@ -21,14 +25,31 @@ public class AddMedicineReminderViewModel extends ViewModel {
 
     public AddMedicineReminderViewModel() {
         this.addMedicineReminderUseCase = Injection.getAddMedicineReminderUseCase();
+        this.removeMedicineUseCase = Injection.getRemoveMedicineUseCase();
     }
 
     public MutableLiveData<Boolean> getSuccess() {
         return success;
     }
 
+    public MutableLiveData<Boolean> getRemoveSuccess() {
+        return removeSuccess;
+    }
+
     public MutableLiveData<String> getError() {
         return error;
+    }
+
+    public MutableLiveData<String> getMedicineNameError() {
+        return medicineNameError;
+    }
+
+    public MutableLiveData<String> getDaysNumberError() {
+        return daysNumberError;
+    }
+
+    public MutableLiveData<String> getNumPerDayError() {
+        return numPerDayError;
     }
 
     public boolean validate(String medicineName, String days, String numPerDay) {
@@ -48,8 +69,31 @@ public class AddMedicineReminderViewModel extends ViewModel {
         return isValid;
     }
 
-    public void addNewMedicineReminder(String medicineName, String medicineImage,
-                                       List<ScheduledTime.Day> days, int numPerDay) {
+    public void addNewMedicineReminder(String userId, String medicineName, String medicineImage,
+                                       List<ScheduledTime> scheduledTimes, int numPerDay) {
+        Medicine medicine = new Medicine();
+        medicine.setMedicineName(medicineName);
+        medicine.setMedicineImageUri(medicineImage);
+        medicine.setDaysNumber(scheduledTimes.size());
+        medicine.setNumberPerDay(numPerDay);
+        medicine.setTimes(scheduledTimes);
+        addMedicineReminderUseCase.execute(userId, medicine, success);
+    }
 
+    public List<ScheduledTime> getAllScheduledDaysWithTimes(List<String> scheduledTimes, List<ScheduledTime.Day> selectedDays) {
+        List<ScheduledTime> times = new ArrayList<>();
+        for (ScheduledTime.Day day : selectedDays) {
+            for (String time : scheduledTimes) {
+                ScheduledTime scheduledTime = new ScheduledTime();
+                scheduledTime.setTime(time);
+                scheduledTime.setDay(day.name());
+                times.add(scheduledTime);
+            }
+        }
+        return times;
+    }
+
+    public void removeMedicine(String userId, String medicineId) {
+        removeMedicineUseCase.execute(userId, medicineId, removeSuccess);
     }
 }

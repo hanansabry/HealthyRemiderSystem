@@ -4,7 +4,7 @@ public class ScheduledTime {
 
     private String day;
     private String time;
-    private String status;
+    private boolean status;
 
     public String getDay() {
         return day;
@@ -22,11 +22,11 @@ public class ScheduledTime {
         this.time = time;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

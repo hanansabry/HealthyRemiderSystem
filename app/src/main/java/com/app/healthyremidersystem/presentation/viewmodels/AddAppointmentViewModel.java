@@ -35,10 +35,10 @@ public class AddAppointmentViewModel extends ViewModel {
         return timeError;
     }
 
-    public void addNewAppointment(String name, String date, String time, String notes) {
+    public void addNewAppointment(String userId, String name, String date, String time, String notes) {
         if (validate(name, date, time)) {
             Appointment appointment = new Appointment(name, date, time, notes);
-            addAppointmentUseCase.execute(appointment, success);
+            addAppointmentUseCase.execute(userId, appointment, success);
         }
     }
 

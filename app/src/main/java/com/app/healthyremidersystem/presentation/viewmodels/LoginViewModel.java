@@ -2,6 +2,7 @@ package com.app.healthyremidersystem.presentation.viewmodels;
 
 import com.app.healthyremidersystem.Injection;
 import com.app.healthyremidersystem.domain.usecases.LoginUseCase;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -46,5 +47,13 @@ public class LoginViewModel extends ViewModel {
             isValidate = false;
         }
         return isValidate;
+    }
+
+    public boolean isLogged() {
+        return FirebaseAuth.getInstance().getCurrentUser() != null;
+    }
+
+    public void logout() {
+        FirebaseAuth.getInstance().signOut();
     }
 }

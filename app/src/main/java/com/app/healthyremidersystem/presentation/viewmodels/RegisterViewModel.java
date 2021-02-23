@@ -1,6 +1,7 @@
 package com.app.healthyremidersystem.presentation.viewmodels;
 
 import com.app.healthyremidersystem.Injection;
+import com.app.healthyremidersystem.domain.usecases.AddUserUseCase;
 import com.app.healthyremidersystem.domain.usecases.RegisterUseCase;
 import com.app.healthyremidersystem.model.User;
 
@@ -15,7 +16,9 @@ public class RegisterViewModel extends ViewModel {
     private static final String EG_REGEX = "(^01\\d{9})";
 
     private RegisterUseCase registerUseCase;
-    private MutableLiveData<Boolean> success  = new MutableLiveData<>();
+    private AddUserUseCase addUserUseCase;
+    private MutableLiveData<User> addedUser = new MutableLiveData<>();
+    private MutableLiveData<User> returnedUser = new MutableLiveData<>();
     private MutableLiveData<String> fullNameError = new MutableLiveData<>();
     private MutableLiveData<String> phoneError = new MutableLiveData<>();
     private MutableLiveData<String> emailError = new MutableLiveData<>();
@@ -27,10 +30,15 @@ public class RegisterViewModel extends ViewModel {
 
     public RegisterViewModel() {
         this.registerUseCase = Injection.getRegisterUseCase();
+        this.addUserUseCase = Injection.getAddUserUserCase();
     }
 
-    public MutableLiveData<Boolean> getSuccess() {
-        return success;
+    public MutableLiveData<User> getUser() {
+        return addedUser;
+    }
+
+    public MutableLiveData<User> getReturnedUser() {
+        return returnedUser;
     }
 
     public MutableLiveData<String> getFullNameError() {
@@ -69,9 +77,13 @@ public class RegisterViewModel extends ViewModel {
                          String password, String confirmPassword, double weight,
                          double length, String gender) {
         if (validate(fullName, phone, email, password, confirmPassword, weight, length, gender)) {
-            User user = new User(fullName, phone, email, weight, length, gender);
-            registerUseCase.execute(user, success);
+            User user = new User(fullName, phone, email, password, weight, length, gender);
+            registerUseCase.execute(user, addedUser);
         }
+    }
+
+    public void addUser(User user) {
+        addUserUseCase.execute(user, returnedUser);
     }
 
     private boolean validate(String fullName, String phone, String email,

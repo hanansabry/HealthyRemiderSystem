@@ -5,15 +5,15 @@ import com.app.healthyremidersystem.model.User;
 
 import androidx.lifecycle.MutableLiveData;
 
-public class RegisterUseCase {
+public class AddUserUseCase {
 
     private UserRepository userRepository;
 
-    public RegisterUseCase(UserRepository userRepository) {
+    public AddUserUseCase(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public void execute(User user, MutableLiveData<User> addedUser) {
-        userRepository.register(user, addedUser);
+    public void execute(User user, MutableLiveData<User> userSuccess) {
+        userRepository.addUserToDB(user, userSuccess);
     }
 }

@@ -10,9 +10,11 @@ import com.app.healthyremidersystem.domain.UserRepositoryImpl;
 import com.app.healthyremidersystem.domain.WeeklyReportRepositoryImpl;
 import com.app.healthyremidersystem.domain.usecases.AddAppointmentUseCase;
 import com.app.healthyremidersystem.domain.usecases.AddMedicineReminderUseCase;
+import com.app.healthyremidersystem.domain.usecases.AddUserUseCase;
 import com.app.healthyremidersystem.domain.usecases.GetWeeklyReportUseCase;
 import com.app.healthyremidersystem.domain.usecases.LoginUseCase;
 import com.app.healthyremidersystem.domain.usecases.RegisterUseCase;
+import com.app.healthyremidersystem.domain.usecases.RemoveMedicineUseCase;
 import com.app.healthyremidersystem.domain.usecases.RetrieveMedicinesRemindersUseCase;
 
 public class Injection {
@@ -25,10 +27,10 @@ public class Injection {
     }
 
     public static AddMedicineReminderUseCase getAddMedicineReminderUseCase() {
-        return new AddMedicineReminderUseCase(getMedicineRepositroy());
+        return new AddMedicineReminderUseCase(getMedicineRepository());
     }
 
-    private static MedicineRepository getMedicineRepositroy() {
+    private static MedicineRepository getMedicineRepository() {
         return new MedicineRepositoryImpl();
     }
 
@@ -53,6 +55,14 @@ public class Injection {
     }
 
     public static RetrieveMedicinesRemindersUseCase getRetrieveMedicinesRemindersUseCase() {
-        return new RetrieveMedicinesRemindersUseCase(getMedicineRepositroy());
+        return new RetrieveMedicinesRemindersUseCase(getMedicineRepository());
+    }
+
+    public static AddUserUseCase getAddUserUserCase() {
+        return new AddUserUseCase(getUserRepository());
+    }
+
+    public static RemoveMedicineUseCase getRemoveMedicineUseCase() {
+        return new RemoveMedicineUseCase(getMedicineRepository());
     }
 }

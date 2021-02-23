@@ -53,7 +53,7 @@
                     android:padding="12dp"
                     android:textSize="20sp"/>
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editClinicName"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
@@ -75,7 +75,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp">
 
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editAppointmentDate"
                         android:layout_width="0dp"
                         android:layout_weight="7"
@@ -83,6 +83,7 @@
                         android:background="@drawable/corner_white"
                         android:gravity="center_vertical"
                         android:hint="Date"
+                        android:editable="false"
                         android:inputType="date"
                         android:padding="16dp"
                         android:textSize="14sp"
@@ -108,7 +109,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp">
 
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editAppointmentTime"
                         android:layout_width="0dp"
                         android:layout_weight="7"
@@ -116,6 +117,7 @@
                         android:background="@drawable/corner_white"
                         android:gravity="center_vertical"
                         android:hint="Time"
+                        android:editable="false"
                         android:inputType="datetime"
                         android:padding="16dp"
                         android:textSize="14sp"
@@ -134,7 +136,7 @@
 
                 </LinearLayout>
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/notesEditText"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
@@ -151,8 +153,7 @@
                     android:textColorHint="@color/text_gray" />
 
                 <Button
-                    android:id="@+id/btnStart"
-                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:id="@+id/btnSet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"

@@ -13,7 +13,7 @@ public class AddMedicineReminderUseCase {
         this.medicineRepository = medicineRepository;
     }
 
-    public void execute(Medicine medicine, MutableLiveData<Boolean> success) {
-        medicineRepository.addMedicineReminder(medicine, success);
+    public void execute(String userId, Medicine medicine, MutableLiveData<Boolean> success) {
+        medicineRepository.addMedicineReminder(userId, medicine, success);
     }
 }

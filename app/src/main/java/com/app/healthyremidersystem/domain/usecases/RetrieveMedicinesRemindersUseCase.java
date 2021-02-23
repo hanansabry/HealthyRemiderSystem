@@ -15,7 +15,7 @@ public class RetrieveMedicinesRemindersUseCase {
         this.medicineRepository = medicineRepository;
     }
 
-    public void execute(MutableLiveData<List<Medicine>> medicines) {
-        medicineRepository.retrieveAllMedicinesReminders(medicines);
+    public void execute(String userId, MutableLiveData<List<Medicine>> medicines) {
+        medicineRepository.retrieveAllMedicinesReminders(userId, medicines);
     }
 }

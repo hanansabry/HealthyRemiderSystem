@@ -82,7 +82,7 @@
                     android:padding="12dp"
                     android:textSize="20sp"/>
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextMedicineName"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
@@ -97,39 +97,66 @@
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/text_gray" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextMedicineImage"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:weightSum="6">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextMedicineImage"
+                        android:layout_width="0dp"
+                        android:layout_weight="5"
+                        android:layout_height="54dp"
+                        android:background="@drawable/corner_light_gray"
+                        android:gravity="bottom"
+                        android:hint="Set medicine image"
+                        android:inputType="textUri"
+                        android:padding="16dp"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimary"
+                        android:textColorHint="@color/text_gray" />
+
+                    <ImageButton
+                        android:id="@+id/selectImageButton"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_select_icon"
+                        android:scaleType="fitCenter"
+                        android:padding="4dp"
+                        android:background="@null"/>
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/editTextDays"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
                     android:background="@drawable/corner_light_gray"
                     android:gravity="bottom"
-                    android:hint="Set medicine image"
-                    android:inputType="textUri"
+                    android:hint="Days"
                     android:padding="16dp"
                     android:textSize="14sp"
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/text_gray" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="54dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@drawable/corner_light_gray"
-                    android:gravity="bottom"
-                    android:hint="Number of days"
-                    android:inputType="number"
-                    android:padding="16dp"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorPrimary"
-                    android:textColorHint="@color/text_gray" />
+<!--                <TextView-->
+<!--                    android:id="@+id/editTextDays"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="54dp"-->
+<!--                    android:background="@drawable/corner_light_gray"-->
+<!--                    android:hint="Days" />-->
+
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextPassword"
+                    android:id="@+id/editTextNumPerDays"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
                     android:layout_marginStart="24dp"
@@ -144,7 +171,7 @@
                     android:textColorHint="@color/text_gray" />
 
                 <Button
-                    android:id="@+id/btnRegister"
+                    android:id="@+id/btnSchedule"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -159,6 +186,7 @@
                     android:textSize="16sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/scheduledTimesRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -166,6 +194,22 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"
                     tools:listitem="@layout/time_scheduled_item"/>
+
+                <Button
+                    android:id="@+id/btnDone"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/cornered_accent_bg_fill"
+                    android:text="Done"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
 
             </LinearLayout>
 

@@ -31,6 +31,22 @@
                 android:src="@drawable/ic_back_white" />
 
             <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:text="Log out"
+                android:textColor="@color/colorPrimary"
+                android:textAllCaps="false"
+                android:background="@null"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:tint="@color/colorPrimary"
+                android:src="@drawable/ic_back_white"
+                android:layout_marginEnd="8dp"
+                android:layout_toStartOf="@id/btnAllReminders"/>
+
+            <Button
                 android:id="@+id/btnAllReminders"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,10 +54,10 @@
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 android:text="See All Reminders"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:textColor="@color/colorPrimary"
                 android:textAllCaps="false"
                 android:background="@null"
-                style="@style/Widget.AppCompat.Button.Borderless"
                 android:tint="@color/colorPrimary"
                 android:src="@drawable/ic_back_white" />
         </RelativeLayout>
@@ -245,7 +261,8 @@
                     android:src="@drawable/water_icon"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:layout_margin="8dp"/>
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"/>
             </RelativeLayout>
 
 

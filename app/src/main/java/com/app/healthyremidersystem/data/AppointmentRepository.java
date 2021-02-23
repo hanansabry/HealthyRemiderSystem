@@ -6,5 +6,5 @@ import androidx.lifecycle.MutableLiveData;
 
 public interface AppointmentRepository {
 
-    void addNewAppointment(Appointment appointment, MutableLiveData<Boolean> success);
+    void addNewAppointment(String userId, Appointment appointment, MutableLiveData<Boolean> success);
 }

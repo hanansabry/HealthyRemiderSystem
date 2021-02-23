@@ -27,8 +27,8 @@ public class RetrieveMedicinesRemindersViewModel extends ViewModel {
         return error;
     }
 
-    public void retrieveMedicinesReminders() {
-        retrieveMedicinesRemindersUseCase.execute(medicines);
+    public void retrieveMedicinesReminders(String userId) {
+        retrieveMedicinesRemindersUseCase.execute(userId, medicines);
     }
 
 }

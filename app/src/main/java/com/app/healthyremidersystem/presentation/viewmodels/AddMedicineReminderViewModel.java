@@ -70,13 +70,14 @@ public class AddMedicineReminderViewModel extends ViewModel {
     }
 
     public void addNewMedicineReminder(String userId, String medicineName, String medicineImage, int daysNumber,
-                                       List<ScheduledTime> scheduledTimes, int numPerDay) {
+                                       List<String> timesPerDay, List<ScheduledTime> scheduledTimes, int numPerDay) {
         Medicine medicine = new Medicine();
         medicine.setMedicineName(medicineName);
         medicine.setMedicineImageUri(medicineImage);
         medicine.setDaysNumber(daysNumber);
+        medicine.setTimesPerDay(timesPerDay);
         medicine.setNumberPerDay(numPerDay);
-        medicine.setTimes(scheduledTimes);
+        medicine.setScheduledTimes(scheduledTimes);
         addMedicineReminderUseCase.execute(userId, medicine, retrievedMedicine);
     }
 

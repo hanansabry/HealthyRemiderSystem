@@ -10,9 +10,10 @@ public class Medicine {
     private String medicineImageUri;
     private int daysNumber;
     private int numberPerDay;
+    private List<String> timesPerDay;
     private double takingMedicinePercentage;
     private String takingMedicineStatus;
-    private List<ScheduledTime> times;
+    private List<ScheduledTime> scheduledTimes;
 
     public int getMedicineId() {
         return medicineId;
@@ -50,6 +51,18 @@ public class Medicine {
         this.numberPerDay = numberPerDay;
     }
 
+    public void setMedicineId(int medicineId) {
+        this.medicineId = medicineId;
+    }
+
+    public List<String> getTimesPerDay() {
+        return timesPerDay;
+    }
+
+    public void setTimesPerDay(List<String> timesPerDay) {
+        this.timesPerDay = timesPerDay;
+    }
+
     public double getTakingMedicinePercentage() {
         return takingMedicinePercentage;
     }
@@ -66,17 +79,17 @@ public class Medicine {
         this.takingMedicineStatus = takingMedicineStatus;
     }
 
-    public List<ScheduledTime> getTimes() {
-        return times;
+    public List<ScheduledTime> getScheduledTimes() {
+        return scheduledTimes;
     }
 
-    public void setTimes(List<ScheduledTime> times) {
-        this.times = times;
+    public void setScheduledTimes(List<ScheduledTime> scheduledTimes) {
+        this.scheduledTimes = scheduledTimes;
     }
 
     public int getTakenNumber() {
         int takenNumber = 0;
-        for (ScheduledTime time : times) {
+        for (ScheduledTime time : scheduledTimes) {
             if (time.getStatus()) {
                 takenNumber++;
             }
@@ -85,7 +98,7 @@ public class Medicine {
     }
 
     public MedicineStatus getMedicineStatus() {
-        int percent = (getTakenNumber() / times.size()) * 100;
+        int percent = (getTakenNumber() / scheduledTimes.size()) * 100;
         if (percent <= 100 && percent >= 90) {
             return MedicineStatus.PERFECT;
         } else if (percent < 90 && percent >= 75) {

@@ -54,6 +54,7 @@ public class AddMedicineReminderActivity extends AppCompatActivity implements Sc
     private String days;
     private String numPerDays;
     private List<ScheduledTime> allScheduledTimes;
+    private List<String> timesPerDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +89,8 @@ public class AddMedicineReminderActivity extends AppCompatActivity implements Sc
 
     private void setMedicineAlarms(Medicine retrievedMedicine) {
         AlarmController alarmController = new AlarmController(this);
-        for (int i = 0; i < retrievedMedicine.getTimes().size(); i++) {
-            ScheduledTime scheduledTime = retrievedMedicine.getTimes().get(i);
+        for (int i = 0; i < retrievedMedicine.getScheduledTimes().size(); i++) {
+            ScheduledTime scheduledTime = retrievedMedicine.getScheduledTimes().get(i);
             int[] hourMinutes = new Helper(this).splitTimeIntoHourAndMinute(scheduledTime.getTime());
             alarmController.setRepeatingAlarm(i, ScheduledTime.Day.valueOf(scheduledTime.getDay()).getDayValue(),
                     hourMinutes[0],
@@ -173,8 +174,9 @@ public class AddMedicineReminderActivity extends AppCompatActivity implements Sc
     }
 
     @Override
-    public void onAllTimesSet(List<String> scheduledTimes) {
-        allScheduledTimes = addMedicineReminderViewModel.getAllScheduledDaysWithTimes(scheduledTimes, selectedDays);
+    public void onAllTimesSet(List<String> timesPerDays) {
+        this.timesPerDay = timesPerDays;
+        allScheduledTimes = addMedicineReminderViewModel.getAllScheduledDaysWithTimes(timesPerDays, selectedDays);
         btnDone.setVisibility(View.VISIBLE);
     }
 
@@ -182,7 +184,13 @@ public class AddMedicineReminderActivity extends AppCompatActivity implements Sc
     public void onDoneClicked() {
         Toast.makeText(this, allScheduledTimes.size()+"", Toast.LENGTH_SHORT).show();
         getMedicineValues();
-        addMedicineReminderViewModel.addNewMedicineReminder(Constants.getUserId(this), medicineName, medicineImage, selectedDays.size(), allScheduledTimes, Integer.parseInt(numPerDays));
+        addMedicineReminderViewModel.addNewMedicineReminder(Constants.getUserId(this),
+                medicineName,
+                medicineImage,
+                selectedDays.size(),
+                timesPerDay,
+                allScheduledTimes,
+                Integer.parseInt(numPerDays));
     }
 
     @OnClick(R.id.selectImageButton)

@@ -30,7 +30,7 @@ public class WeeklyReportRepositoryImpl implements WeeklyReportRepository {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         int num = 0;
                         Medicine medicine = snapshot.getValue(Medicine.class);
-                        for (ScheduledTime time : medicine.getTimes()) {
+                        for (ScheduledTime time : medicine.getScheduledTimes()) {
                             if (time.getStatus()) {
                                 num++;
                             }

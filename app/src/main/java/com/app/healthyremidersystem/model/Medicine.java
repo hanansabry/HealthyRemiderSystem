@@ -1,10 +1,11 @@
 package com.app.healthyremidersystem.model;
 
 import java.util.List;
+import java.util.Random;
 
 public class Medicine {
 
-    private String id;
+    private int medicineId = new Random().nextInt(1000000) + 100000000;
     private String medicineName;
     private String medicineImageUri;
     private int daysNumber;
@@ -13,12 +14,8 @@ public class Medicine {
     private String takingMedicineStatus;
     private List<ScheduledTime> times;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public int getMedicineId() {
+        return medicineId;
     }
 
     public String getMedicineName() {
@@ -75,5 +72,30 @@ public class Medicine {
 
     public void setTimes(List<ScheduledTime> times) {
         this.times = times;
+    }
+
+    public int getTakenNumber() {
+        int takenNumber = 0;
+        for (ScheduledTime time : times) {
+            if (time.getStatus()) {
+                takenNumber++;
+            }
+        }
+        return takenNumber;
+    }
+
+    public MedicineStatus getMedicineStatus() {
+        int percent = (getTakenNumber() / times.size()) * 100;
+        if (percent <= 100 && percent >= 90) {
+            return MedicineStatus.PERFECT;
+        } else if (percent < 90 && percent >= 75) {
+            return MedicineStatus.ACCEPTED;
+        } else {
+            return MedicineStatus.CARELESS;
+        }
+    }
+
+    public enum MedicineStatus {
+        PERFECT, ACCEPTED, CARELESS
     }
 }

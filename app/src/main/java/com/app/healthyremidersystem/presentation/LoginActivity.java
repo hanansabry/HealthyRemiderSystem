@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.app.healthyremidersystem.Helper;
 import com.app.healthyremidersystem.R;
 import com.app.healthyremidersystem.presentation.viewmodels.LoginViewModel;
 import com.google.android.material.textfield.TextInputEditText;
@@ -32,10 +33,13 @@ public class LoginActivity extends AppCompatActivity {
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
-        loginViewModel.getSuccess().observe(this, success -> {
-            if (success) {
+        loginViewModel.getUserId().observe(this, userId -> {
+            if (userId != null) {
                 Toast.makeText(this, "You logged in successfully", Toast.LENGTH_SHORT).show();
+                //save user id in the shared preferences
+                new Helper(this).saveUserIdLocally(userId);
                 startActivity(new Intent(this, MainActivity.class));
+                //TODO: get all old medicines and make alert for them
             } else {
                 Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
             }

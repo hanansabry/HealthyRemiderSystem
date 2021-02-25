@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel;
 public class AddAppointmentViewModel extends ViewModel {
 
     private AddAppointmentUseCase addAppointmentUseCase;
-    private MutableLiveData<Boolean> success = new MutableLiveData<>();
+    private MutableLiveData<Appointment> returnedAppointment = new MutableLiveData<>();
     private MutableLiveData<String> nameError = new MutableLiveData<>();
     private MutableLiveData<String> dateError = new MutableLiveData<>();
     private MutableLiveData<String> timeError = new MutableLiveData<>();
@@ -19,8 +19,8 @@ public class AddAppointmentViewModel extends ViewModel {
         this.addAppointmentUseCase = Injection.getAddAppointmentUseCase();
     }
 
-    public MutableLiveData<Boolean> getSuccess() {
-        return success;
+    public MutableLiveData<Appointment> getReturnedAppointment() {
+        return returnedAppointment;
     }
 
     public MutableLiveData<String> getNameError() {
@@ -38,7 +38,7 @@ public class AddAppointmentViewModel extends ViewModel {
     public void addNewAppointment(String userId, String name, String date, String time, String notes) {
         if (validate(name, date, time)) {
             Appointment appointment = new Appointment(name, date, time, notes);
-            addAppointmentUseCase.execute(userId, appointment, success);
+            addAppointmentUseCase.execute(userId, appointment, returnedAppointment);
         }
     }
 

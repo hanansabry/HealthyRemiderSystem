@@ -31,6 +31,16 @@ public class ScheduledTime {
     }
 
     public enum Day {
-        SAT, SUN, MON, TUE, WED, THU, FRI
+        SAT(7), SUN(1), MON(2), TUE(3), WED(4), THU(5), FRI(6);
+
+        private final int value;
+
+        Day(final int value) {
+            this.value = value;
+        }
+
+        public int getDayValue() {
+            return value;
+        }
     }
 }

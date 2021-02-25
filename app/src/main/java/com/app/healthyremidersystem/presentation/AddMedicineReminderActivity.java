@@ -9,9 +9,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.healthyremidersystem.Constants;
+import com.app.healthyremidersystem.Helper;
 import com.app.healthyremidersystem.R;
+import com.app.healthyremidersystem.model.Medicine;
 import com.app.healthyremidersystem.model.ScheduledTime;
 import com.app.healthyremidersystem.presentation.adapters.ScheduledTimesAdapter;
+import com.app.healthyremidersystem.presentation.notification.AlarmController;
 import com.app.healthyremidersystem.presentation.viewmodels.AddMedicineReminderViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
@@ -59,9 +62,11 @@ public class AddMedicineReminderActivity extends AppCompatActivity implements Sc
         ButterKnife.bind(this);
 
         addMedicineReminderViewModel = new ViewModelProvider(this).get(AddMedicineReminderViewModel.class);
-        addMedicineReminderViewModel.getSuccess().observe(this, success -> {
-            if (success) {
+        addMedicineReminderViewModel.getRetrievedMedicine().observe(this, retrievedMedicine -> {
+            if (retrievedMedicine != null) {
                 Toast.makeText(this, "New medicine reminder is added", Toast.LENGTH_SHORT).show();
+                //add alarms for this medicine
+                setMedicineAlarms(retrievedMedicine);
                 finish();
             } else {
                 Toast.makeText(this, "Something wrong is happened, please try again later", Toast.LENGTH_SHORT).show();
@@ -79,6 +84,20 @@ public class AddMedicineReminderActivity extends AppCompatActivity implements Sc
         addMedicineReminderViewModel.getNumPerDayError().observe(this, error -> {
             editTextNumPerDays.setError(error);
         });
+    }
+
+    private void setMedicineAlarms(Medicine retrievedMedicine) {
+        AlarmController alarmController = new AlarmController(this);
+        for (int i = 0; i < retrievedMedicine.getTimes().size(); i++) {
+            ScheduledTime scheduledTime = retrievedMedicine.getTimes().get(i);
+            int[] hourMinutes = new Helper(this).splitTimeIntoHourAndMinute(scheduledTime.getTime());
+            alarmController.setRepeatingAlarm(i, ScheduledTime.Day.valueOf(scheduledTime.getDay()).getDayValue(),
+                    hourMinutes[0],
+                    hourMinutes[1],
+                    retrievedMedicine.getMedicineName(),
+                    retrievedMedicine.getMedicineId(),
+                    retrievedMedicine.getMedicineId()+i);
+        }
     }
 
     @OnClick(R.id.btnAllReminders)
@@ -163,7 +182,7 @@ public class AddMedicineReminderActivity extends AppCompatActivity implements Sc
     public void onDoneClicked() {
         Toast.makeText(this, allScheduledTimes.size()+"", Toast.LENGTH_SHORT).show();
         getMedicineValues();
-        addMedicineReminderViewModel.addNewMedicineReminder(Constants.getUserId(this), medicineName, medicineImage, allScheduledTimes, Integer.parseInt(numPerDays));
+        addMedicineReminderViewModel.addNewMedicineReminder(Constants.getUserId(this), medicineName, medicineImage, selectedDays.size(), allScheduledTimes, Integer.parseInt(numPerDays));
     }
 
     @OnClick(R.id.selectImageButton)

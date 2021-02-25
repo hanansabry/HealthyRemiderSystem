@@ -12,7 +12,7 @@ public class LoginUseCase {
         this.userRepository = userRepository;
     }
 
-    public void execute(String email, String password, MutableLiveData<Boolean> success) {
-        userRepository.login(email, password, success);
+    public void execute(String email, String password, MutableLiveData<String> userId) {
+        userRepository.login(email, password, userId);
     }
 }

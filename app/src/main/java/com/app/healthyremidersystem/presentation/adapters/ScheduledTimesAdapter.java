@@ -44,6 +44,29 @@ public class ScheduledTimesAdapter extends RecyclerView.Adapter<ScheduledTimesAd
     @Override
     public void onBindViewHolder(@NonNull ScheduledTimeViewHolder holder, int position) {
         holder.numberOfTimeTextView.setText(String.valueOf(position+1));
+        holder.setTimeButton.setOnClickListener(v -> {
+            Calendar mCurrentTime = Calendar.getInstance();
+            int hour = mCurrentTime.get(Calendar.HOUR_OF_DAY);
+            int minute = mCurrentTime.get(Calendar.MINUTE);
+            TimePickerDialog mTimePicker;
+            mTimePicker = new TimePickerDialog(holder.context, (timePicker, selectedHour, selectedMinute) -> {
+                String selectedHourS = (selectedHour < 10) ? "0" + selectedHour : String.valueOf(selectedHour);
+                String selectedMinuteS = (selectedMinute < 10) ? "0" + selectedMinute : String.valueOf(selectedMinute);
+                String time = String.format(Locale.US, "%s:%s", selectedHourS, selectedMinuteS);
+                if (scheduledTimes.size() == numberPerDay) {
+                    scheduledTimes.set(position, time);
+                } else {
+                    scheduledTimes.add(time);
+                }
+                holder.timeTextView.setText(time);
+                if (scheduledTimes.size() == numberPerDay) {
+                    scheduledTimeCallback.onAllTimesSet(scheduledTimes);
+                }
+            }, hour, minute, false);
+            mTimePicker.setTitle("Select Time");
+            mTimePicker.show();
+
+        });
     }
 
     @Override
@@ -66,31 +89,6 @@ public class ScheduledTimesAdapter extends RecyclerView.Adapter<ScheduledTimesAd
             super(itemView);
             ButterKnife.bind(this, itemView);
             context = itemView.getContext();
-        }
-
-        @OnClick(R.id.setTimeButton)
-        public void onSetTimeClicked() {
-            setTimeButton.setOnClickListener(v -> {
-                Calendar mCurrentTime = Calendar.getInstance();
-                int hour = mCurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mCurrentTime.get(Calendar.MINUTE);
-                TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(context, (timePicker, selectedHour, selectedMinute) -> {
-                    String time = String.format(Locale.US, "%d:%d", selectedHour, selectedMinute);
-                    if (scheduledTimes.size() == numberPerDay) {
-                        scheduledTimes.set(getAdapterPosition(), time);
-                    } else {
-                        scheduledTimes.add(time);
-                    }
-                    timeTextView.setText(time);
-                    if (scheduledTimes.size() == numberPerDay) {
-                        scheduledTimeCallback.onAllTimesSet(scheduledTimes);
-                    }
-                }, hour, minute, false);
-                mTimePicker.setTitle("Select Time");
-                mTimePicker.show();
-
-            });
         }
     }
 

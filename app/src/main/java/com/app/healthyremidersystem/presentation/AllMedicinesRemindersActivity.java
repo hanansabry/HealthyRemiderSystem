@@ -33,7 +33,7 @@ public class AllMedicinesRemindersActivity extends AppCompatActivity implements 
         retrieveMedicinesRemindersViewModel.retrieveMedicinesReminders(Constants.getUserId(this));
 
         retrieveMedicinesRemindersViewModel.getMedicines().observe(this, medicines -> {
-            MedicinesAdapter adapter = new MedicinesAdapter(medicines, this, false);
+            MedicinesAdapter adapter = new MedicinesAdapter(medicines, this);
             allRemindersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             allRemindersRecyclerView.setAdapter(adapter);
         });
@@ -50,6 +50,7 @@ public class AllMedicinesRemindersActivity extends AppCompatActivity implements 
 
         addMedicineReminderViewModel.getRemoveSuccess().observe(this, success -> {
             if (success) {
+                // TODO: remove alarm for deleted medicine
                 Toast.makeText(this, "Medicine is removed successfully", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Something wrong is happened, please try again later", Toast.LENGTH_SHORT).show();

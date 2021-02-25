@@ -16,7 +16,7 @@ public class AddMedicineReminderViewModel extends ViewModel {
 
     private AddMedicineReminderUseCase addMedicineReminderUseCase;
     private RemoveMedicineUseCase removeMedicineUseCase;
-    private MutableLiveData<Boolean> success = new MutableLiveData<>();
+    private MutableLiveData<Medicine> retrievedMedicine = new MutableLiveData<>();
     private MutableLiveData<Boolean> removeSuccess = new MutableLiveData<>();
     private MutableLiveData<String> medicineNameError = new MutableLiveData<>();
     private MutableLiveData<String> daysNumberError = new MutableLiveData<>();
@@ -28,8 +28,8 @@ public class AddMedicineReminderViewModel extends ViewModel {
         this.removeMedicineUseCase = Injection.getRemoveMedicineUseCase();
     }
 
-    public MutableLiveData<Boolean> getSuccess() {
-        return success;
+    public MutableLiveData<Medicine> getRetrievedMedicine() {
+        return retrievedMedicine;
     }
 
     public MutableLiveData<Boolean> getRemoveSuccess() {
@@ -69,15 +69,15 @@ public class AddMedicineReminderViewModel extends ViewModel {
         return isValid;
     }
 
-    public void addNewMedicineReminder(String userId, String medicineName, String medicineImage,
+    public void addNewMedicineReminder(String userId, String medicineName, String medicineImage, int daysNumber,
                                        List<ScheduledTime> scheduledTimes, int numPerDay) {
         Medicine medicine = new Medicine();
         medicine.setMedicineName(medicineName);
         medicine.setMedicineImageUri(medicineImage);
-        medicine.setDaysNumber(scheduledTimes.size());
+        medicine.setDaysNumber(daysNumber);
         medicine.setNumberPerDay(numPerDay);
         medicine.setTimes(scheduledTimes);
-        addMedicineReminderUseCase.execute(userId, medicine, success);
+        addMedicineReminderUseCase.execute(userId, medicine, retrievedMedicine);
     }
 
     public List<ScheduledTime> getAllScheduledDaysWithTimes(List<String> scheduledTimes, List<ScheduledTime.Day> selectedDays) {

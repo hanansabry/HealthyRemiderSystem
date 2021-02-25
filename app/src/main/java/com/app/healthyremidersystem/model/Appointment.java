@@ -1,8 +1,10 @@
 package com.app.healthyremidersystem.model;
 
+import java.util.Random;
+
 public class Appointment {
 
-    private String id;
+    private int id = new Random().nextInt(1000000) + 100000000;
     private String placeName;
     private String day;
     private String time;
@@ -15,12 +17,8 @@ public class Appointment {
         this.notes = notes;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getPlaceName() {

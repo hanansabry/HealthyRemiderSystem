@@ -8,13 +8,8 @@ import butterknife.OnClick;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.app.healthyremidersystem.Helper;
 import com.app.healthyremidersystem.R;
-import com.app.healthyremidersystem.presentation.AllMedicinesRemindersActivity;
-import com.app.healthyremidersystem.presentation.DrinkingWaterActivity;
-import com.app.healthyremidersystem.presentation.HealthAdviceActivity;
-import com.app.healthyremidersystem.presentation.HospitalAppointmentActivity;
-import com.app.healthyremidersystem.presentation.AddMedicineReminderActivity;
-import com.app.healthyremidersystem.presentation.WeeklyReportActivity;
 import com.app.healthyremidersystem.presentation.viewmodels.LoginViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public void onLogoutClicked() {
         LoginViewModel loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         loginViewModel.logout();
+        new Helper(this).removeUserId();
         Intent i = new Intent(this, StartActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);

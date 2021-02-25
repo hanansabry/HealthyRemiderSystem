@@ -2,6 +2,7 @@ package com.app.healthyremidersystem.presentation.viewmodels;
 
 import com.app.healthyremidersystem.Injection;
 import com.app.healthyremidersystem.domain.usecases.LoginUseCase;
+import com.app.healthyremidersystem.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.lifecycle.MutableLiveData;
@@ -10,7 +11,7 @@ import androidx.lifecycle.ViewModel;
 public class LoginViewModel extends ViewModel {
 
     private LoginUseCase loginUseCase;
-    private MutableLiveData<Boolean> success = new MutableLiveData<>();
+    private MutableLiveData<String> userId = new MutableLiveData<>();
     private MutableLiveData<String> emailError = new MutableLiveData<>();
     private MutableLiveData<String> passwordError = new MutableLiveData<>();
 
@@ -18,8 +19,8 @@ public class LoginViewModel extends ViewModel {
         this.loginUseCase = Injection.getLoginUseCase();
     }
 
-    public MutableLiveData<Boolean> getSuccess() {
-        return success;
+    public MutableLiveData<String> getUserId() {
+        return userId;
     }
 
     public MutableLiveData<String> getEmailError() {
@@ -32,7 +33,7 @@ public class LoginViewModel extends ViewModel {
 
     public void login(String email, String password) {
         if (validate(email, password)) {
-            loginUseCase.execute(email, password, success);
+            loginUseCase.execute(email, password, userId);
         }
     }
 

@@ -9,9 +9,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
 public class MedicineRepositoryImpl implements MedicineRepository {
@@ -23,11 +25,17 @@ public class MedicineRepositoryImpl implements MedicineRepository {
     }
 
     @Override
-    public void addMedicineReminder(String userId, Medicine medicine, MutableLiveData<Boolean> success) {
+    public void addMedicineReminder(String userId, Medicine medicine, MutableLiveData<Medicine> retrievedMedicine) {
         databaseReference.child(userId)
                 .child("medicines")
-                .push().setValue(medicine)
-                .addOnCompleteListener(task -> success.setValue(task.isSuccessful()));
+                .child(String.valueOf(medicine.getMedicineId())).setValue(medicine)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        retrievedMedicine.setValue(medicine);
+                    } else {
+                        retrievedMedicine.setValue(null);
+                    }
+                });
     }
 
     @Override
@@ -40,7 +48,6 @@ public class MedicineRepositoryImpl implements MedicineRepository {
                         List<Medicine> medicineList = new ArrayList<>();
                         for (DataSnapshot medicineSnapshot : snapshot.getChildren()) {
                             Medicine medicine = medicineSnapshot.getValue(Medicine.class);
-                            medicine.setId(medicineSnapshot.getKey());
                             medicineList.add(medicine);
                         }
                         medicines.setValue(medicineList);
@@ -55,8 +62,23 @@ public class MedicineRepositoryImpl implements MedicineRepository {
 
     @Override
     public void removeMedicine(String userId, String medicineId, MutableLiveData<Boolean> success) {
-        databaseReference.child(userId).child(medicineId).removeValue().addOnCompleteListener(
-                task -> success.setValue(task.isSuccessful())
-        );
+        databaseReference.child(userId).child("medicines").child(medicineId).removeValue(new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                success.setValue(error==null);
+            }
+        });
+    }
+
+    @Override
+    public void updateScheduledTimeStatus(String userId, String medicineId, int timePosition, boolean done) {
+        HashMap<String, Object> updatedStatus = new HashMap<>();
+        updatedStatus.put("status", done);
+        databaseReference.child(userId)
+                .child("medicines")
+                .child(medicineId)
+                .child("times")
+                .child(String.valueOf(timePosition))
+                .updateChildren(updatedStatus);
     }
 }

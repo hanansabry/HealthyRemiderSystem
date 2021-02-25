@@ -21,10 +21,14 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void login(String email, String password, MutableLiveData<Boolean> success) {
+    public void login(String email, String password, MutableLiveData<String> userId) {
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
-                    success.setValue(task.isSuccessful());
+                    if (task.isSuccessful()) {
+                        userId.setValue(task.getResult().getUser().getUid());
+                    } else {
+                        userId.setValue(null);
+                    }
                 });
     }
 
@@ -32,6 +36,7 @@ public class UserRepositoryImpl implements UserRepository {
     public void register(User user, MutableLiveData<User> addedUser) {
         auth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
                 .addOnCompleteListener(task -> {
+                    user.setId(task.getResult().getUser().getUid());
                     if (task.isSuccessful()) {
                         addedUser.setValue(user);
                     } else {
@@ -43,10 +48,8 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void addUserToDB(User user, MutableLiveData<User> userSuccess) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
-        DatabaseReference userId = databaseReference.push();
-        userId.setValue(user).addOnCompleteListener(task -> {
+        databaseReference.child(user.getId()).setValue(user).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                user.setId(userId.getKey());
                 userSuccess.setValue(user);
             } else {
                 userSuccess.setValue(null);

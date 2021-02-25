@@ -16,10 +16,10 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     }
 
     @Override
-    public void addNewAppointment(String userId, Appointment appointment, MutableLiveData<Boolean> success) {
+    public void addNewAppointment(String userId, Appointment appointment, MutableLiveData<Appointment> returnedAppointment) {
         databaseReference.child(userId)
                 .child("appointments")
-                .push()
-                .setValue(appointment).addOnCompleteListener(task -> success.setValue(task.isSuccessful()));
+                .child(String.valueOf(appointment.getId()))
+                .setValue(appointment).addOnCompleteListener(task -> returnedAppointment.setValue(appointment));
     }
 }

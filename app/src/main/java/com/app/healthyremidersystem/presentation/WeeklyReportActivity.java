@@ -6,19 +6,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.app.healthyremidersystem.Constants;
+import com.app.healthyremidersystem.Helper;
 import com.app.healthyremidersystem.R;
 import com.app.healthyremidersystem.presentation.adapters.MedicinesAdapter;
+import com.app.healthyremidersystem.presentation.adapters.WeeklyReportAdapter;
 import com.app.healthyremidersystem.presentation.viewmodels.RetrieveMedicinesRemindersViewModel;
 
 public class WeeklyReportActivity extends AppCompatActivity {
 
-    @BindView(R.id.allRemindersRecyclerView)
-    RecyclerView allRemindersRecyclerView;
+    @BindView(R.id.weeklyReportRecyclerView)
+    RecyclerView weeklyReportRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +31,21 @@ public class WeeklyReportActivity extends AppCompatActivity {
 
         RetrieveMedicinesRemindersViewModel retrieveMedicinesRemindersViewModel
                 = new ViewModelProvider(this).get(RetrieveMedicinesRemindersViewModel.class);
-        retrieveMedicinesRemindersViewModel.retrieveMedicinesReminders(Constants.getUserId(this));
+        retrieveMedicinesRemindersViewModel.retrieveMedicinesReminders(new Helper(this).getUserId());
 
         retrieveMedicinesRemindersViewModel.getMedicines().observe(this, medicines -> {
-            MedicinesAdapter adapter = new MedicinesAdapter(medicines, null, true);
-            allRemindersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-            allRemindersRecyclerView.setAdapter(adapter);
+            WeeklyReportAdapter adapter = new WeeklyReportAdapter(medicines);
+            weeklyReportRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            weeklyReportRecyclerView.setAdapter(adapter);
         });
 
         retrieveMedicinesRemindersViewModel.getError().observe(this, error -> {
             Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
         });
+    }
+
+    @OnClick(R.id.btnBack)
+    public void onBackClicked() {
+        onBackPressed();
     }
 }

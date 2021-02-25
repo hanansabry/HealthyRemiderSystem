@@ -24,7 +24,7 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.Medi
     private MedicinesCallback medicinesCallback;
     private boolean isReport;
 
-    public MedicinesAdapter(List<Medicine> medicineList, MedicinesCallback medicinesCallback, boolean isReport) {
+    public MedicinesAdapter(List<Medicine> medicineList, MedicinesCallback medicinesCallback) {
         this.medicineList = medicineList;
         this.medicinesCallback = medicinesCallback;
         this.isReport = isReport;
@@ -33,12 +33,7 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.Medi
     @NonNull
     @Override
     public MedicineViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = null;
-        if (isReport) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.medicine_reminder_report_item, null);
-        } else {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.medicine_reminder_item, null);
-        }
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.medicine_reminder_item, null);
         return new MedicineViewHolder(view);
     }
 
@@ -49,7 +44,7 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.Medi
         holder.dozeTextView.setText(String.format(Locale.US, "%d time/day", medicine.getNumberPerDay()));
         holder.deleteItemButton.setOnClickListener(v -> {
             medicineList.remove(position);
-            medicinesCallback.removeMedicine(medicine.getId());
+            medicinesCallback.removeMedicine(String.valueOf(medicine.getMedicineId()));
             notifyDataSetChanged();
         });
     }

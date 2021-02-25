@@ -16,6 +16,6 @@ public class GetWeeklyReportUseCase {
     }
 
     public void execute(MutableLiveData<List<Medicine>> medicines) {
-        weeklyReportRepository.getWeeklyReport(medicines);
+//        weeklyReportRepository.getTakenNumberForMedicine(medicines);
     }
 }

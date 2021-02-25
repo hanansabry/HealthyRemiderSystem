@@ -8,5 +8,5 @@ import androidx.lifecycle.MutableLiveData;
 
 public interface WeeklyReportRepository {
 
-    void getWeeklyReport(MutableLiveData<List<Medicine>> medicines);
+    void getTakenNumberForMedicine(String userId, String medicineId, MutableLiveData<Integer> takenNumber);
 }

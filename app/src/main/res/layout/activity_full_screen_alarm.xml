@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
+    tools:context=".presentation.FullScreenAlarmActivity">
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="64dp"
+        android:layout_centerHorizontal="true"
+        android:text="02:00"
+        android:textSize="64dp"
+        android:textColor="@color/white"/>
+
+    <ImageView
+        android:id="@+id/alarmIcon"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/ic_alarm_icon"
+        app:tint="@color/white"
+        android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/alarmIcon"
+        android:layout_marginTop="64dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:id="@+id/doneButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cornered_primary_bg_stroke"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:layout_marginEnd="16dp"
+            android:text="DONE"/>
+
+        <Button
+            android:id="@+id/ignoreButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cornered_primary_bg_stroke"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:text="Ignore"/>
+    </LinearLayout>
+
+</RelativeLayout>

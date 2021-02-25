@@ -8,11 +8,10 @@ import butterknife.OnClick;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.app.healthyremidersystem.R;
+import com.app.healthyremidersystem.presentation.notification.AlarmController;
 import com.app.healthyremidersystem.presentation.viewmodels.LoginViewModel;
 
 public class StartActivity extends AppCompatActivity {
@@ -27,6 +26,8 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
         ButterKnife.bind(this);
 
+//        AlarmController alarmController = new AlarmController(this);
+//        alarmController.setAlarm(0, 5, 3, 10, "temp", 100681144);
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
     }
 

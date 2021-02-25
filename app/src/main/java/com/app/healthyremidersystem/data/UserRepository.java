@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 
 public interface UserRepository {
 
-    void login(String email, String password, MutableLiveData<Boolean> success);
+    void login(String email, String password, MutableLiveData<String> userId);
     void register(User user, MutableLiveData<User> addedUser);
     void addUserToDB(User user, MutableLiveData<User> userSuccess);
 }

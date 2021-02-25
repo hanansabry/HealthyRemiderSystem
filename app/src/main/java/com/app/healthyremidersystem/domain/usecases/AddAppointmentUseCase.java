@@ -13,7 +13,7 @@ public class AddAppointmentUseCase {
         this.appointmentRepository = appointmentRepository;
     }
 
-    public void execute(String userId, Appointment appointment, MutableLiveData<Boolean> success) {
-        appointmentRepository.addNewAppointment(userId, appointment, success);
+    public void execute(String userId, Appointment appointment, MutableLiveData<Appointment> returnedAppointment) {
+        appointmentRepository.addNewAppointment(userId, appointment, returnedAppointment);
     }
 }

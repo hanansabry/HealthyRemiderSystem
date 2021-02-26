@@ -1,6 +1,7 @@
 package com.app.healthyremidersystem.presentation.adapters;
 
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class WeeklyReportAdapter extends RecyclerView.Adapter<WeeklyReportAdapte
     public void onBindViewHolder(@NonNull WeeklyReportAdapter.MedicineViewHolder holder, int position) {
         Medicine medicine = medicineList.get(position);
         holder.medicineNameTextView.setText(medicine.getMedicineName());
+        holder.medicineImageVIew.setImageURI(Uri.parse(medicine.getMedicineImageUri()));
         holder.percentTextView.setText(String.format(Locale.US, "%d/%d", medicine.getTakenNumber(), medicine.getScheduledTimes().size()));
         holder.medicineStatusTextView.setText(medicine.getMedicineStatus().name());
         if (medicine.getMedicineStatus().equals(Medicine.MedicineStatus.PERFECT)) {

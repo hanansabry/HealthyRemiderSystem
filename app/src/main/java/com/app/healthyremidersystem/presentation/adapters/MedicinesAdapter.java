@@ -1,5 +1,6 @@
 package com.app.healthyremidersystem.presentation.adapters;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.Medi
     public void onBindViewHolder(@NonNull MedicineViewHolder holder, int position) {
         Medicine medicine = medicineList.get(position);
         holder.medicineNameTextView.setText(medicine.getMedicineName());
+        holder.medicineImageVIew.setImageURI(Uri.parse(medicine.getMedicineImageUri()));
         holder.dozeTextView.setText(String.format(Locale.US, "%d time/day", medicine.getNumberPerDay()));
         holder.deleteItemButton.setOnClickListener(v -> {
             medicineList.remove(medicine);

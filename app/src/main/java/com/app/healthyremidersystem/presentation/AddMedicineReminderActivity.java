@@ -18,6 +18,10 @@ import com.app.healthyremidersystem.presentation.notification.Alarm;
 import com.app.healthyremidersystem.presentation.viewmodels.AddMedicineReminderViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
+import com.vansuita.pickimage.bean.PickResult;
+import com.vansuita.pickimage.bundle.PickSetup;
+import com.vansuita.pickimage.dialog.PickImageDialog;
+import com.vansuita.pickimage.listeners.IPickResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +36,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
-public class AddMedicineReminderActivity extends AppCompatActivity implements ScheduledTimesAdapter.ScheduledTimeCallback {
+public class AddMedicineReminderActivity extends AppCompatActivity
+        implements ScheduledTimesAdapter.ScheduledTimeCallback, IPickResult {
 
     @BindView(R.id.editTextDays)
     TextView daysEditText;
@@ -181,7 +186,7 @@ public class AddMedicineReminderActivity extends AppCompatActivity implements Sc
 
     @OnClick(R.id.selectImageButton)
     public void onSelectImageClicked() {
-        Toast.makeText(this, "Upload image", Toast.LENGTH_SHORT).show();
+        PickImageDialog.build(new PickSetup()).show(this);
     }
 
     @OnTextChanged(R.id.editTextMedicineName)
@@ -204,4 +209,14 @@ public class AddMedicineReminderActivity extends AppCompatActivity implements Sc
         onBackPressed();
     }
 
+    @Override
+    public void onPickResult(PickResult r) {
+        if (r.getError() == null) {
+            editTextMedicineImage.setText(r.getPath());
+            medicineImage = r.getUri().toString();
+        } else {
+            //Handle possible errors
+            Toast.makeText(this, r.getError().getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
 }

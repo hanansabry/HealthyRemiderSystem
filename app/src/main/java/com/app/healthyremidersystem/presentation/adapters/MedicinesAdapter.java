@@ -43,8 +43,8 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.Medi
         holder.medicineNameTextView.setText(medicine.getMedicineName());
         holder.dozeTextView.setText(String.format(Locale.US, "%d time/day", medicine.getNumberPerDay()));
         holder.deleteItemButton.setOnClickListener(v -> {
-            medicineList.remove(position);
-            medicinesCallback.removeMedicine(String.valueOf(medicine.getMedicineId()));
+            medicineList.remove(medicine);
+            medicinesCallback.removeMedicine(medicine);
             notifyDataSetChanged();
         });
     }
@@ -71,6 +71,6 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.Medi
     }
 
     public interface MedicinesCallback {
-        void removeMedicine(String medicineId);
+        void removeMedicine(Medicine medicine);
     }
 }

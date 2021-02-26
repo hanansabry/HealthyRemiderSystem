@@ -11,7 +11,7 @@ import com.app.healthyremidersystem.Constants;
 import com.app.healthyremidersystem.Helper;
 import com.app.healthyremidersystem.R;
 import com.app.healthyremidersystem.model.Appointment;
-import com.app.healthyremidersystem.presentation.notification.AlarmController;
+import com.app.healthyremidersystem.presentation.notification.Alarm;
 import com.app.healthyremidersystem.presentation.viewmodels.AddAppointmentViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -89,8 +89,15 @@ public class HospitalAppointmentActivity extends AppCompatActivity {
             int year         = Integer.parseInt(DateFormat.format("yyyy", date).toString()); // 2013
             //get hour and minutes
             int[] hourMinutes = new Helper(this).splitTimeIntoHourAndMinute(appointment.getTime());
-            AlarmController alarmController = new AlarmController(this);
-            alarmController.setAlarm(day, monthNumber, year, hourMinutes[0], hourMinutes[1], appointment.getPlaceName(), appointment.getId());
+
+            Alarm alarm = new Alarm(0, year, monthNumber, day,
+                    hourMinutes[0], hourMinutes[1],
+                    appointment.getPlaceName(),
+                    appointment.getId(),
+                    appointment.getId(),
+                    false);
+            alarm.schedule(this);
+            alarm.schedule(this);
         } catch (ParseException e) {
             e.printStackTrace();
         }

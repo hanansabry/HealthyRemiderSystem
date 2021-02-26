@@ -1,4 +1,4 @@
-package com.app.healthyremidersystem.presentation;
+package com.app.healthyremidersystem.presentation.notification;
 
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
@@ -13,7 +13,7 @@ import com.app.healthyremidersystem.domain.MedicineRepositoryImpl;
 public class NotificationActionReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        int medicineId = intent.getIntExtra(Constants.ALERT_ID, -1);
+        int medicineId = intent.getIntExtra(Constants.ALERT_TYPE_ID, -1);
         int timePosition = intent.getIntExtra(Constants.POSITION, -1);
         boolean done = intent.getBooleanExtra(Constants.DONE, false);
 
@@ -23,5 +23,8 @@ public class NotificationActionReceiver extends BroadcastReceiver {
         }
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.cancelAll();
+        //stop the service
+        Intent intentService = new Intent(context, AlarmService.class);
+        context.stopService(intentService);
     }
 }

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.app.healthyremidersystem.Constants;
 import com.app.healthyremidersystem.R;
+import com.app.healthyremidersystem.model.Medicine;
 import com.app.healthyremidersystem.presentation.adapters.MedicinesAdapter;
 import com.app.healthyremidersystem.presentation.viewmodels.AddMedicineReminderViewModel;
 import com.app.healthyremidersystem.presentation.viewmodels.RetrieveMedicinesRemindersViewModel;
@@ -44,13 +45,13 @@ public class AllMedicinesRemindersActivity extends AppCompatActivity implements 
     }
 
     @Override
-    public void removeMedicine(String medicineId) {
+    public void removeMedicine(Medicine medicine) {
         AddMedicineReminderViewModel addMedicineReminderViewModel = new ViewModelProvider(this).get(AddMedicineReminderViewModel.class);
-        addMedicineReminderViewModel.removeMedicine(Constants.getUserId(this), medicineId);
+        addMedicineReminderViewModel.removeMedicine(Constants.getUserId(this), String.valueOf(medicine.getMedicineId()));
 
         addMedicineReminderViewModel.getRemoveSuccess().observe(this, success -> {
             if (success) {
-                // TODO: remove alarm for deleted medicine
+                medicine.removeMedicineAlarms(this);
                 Toast.makeText(this, "Medicine is removed successfully", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Something wrong is happened, please try again later", Toast.LENGTH_SHORT).show();

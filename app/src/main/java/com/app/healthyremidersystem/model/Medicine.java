@@ -1,5 +1,10 @@
 package com.app.healthyremidersystem.model;
 
+import android.content.Context;
+
+import com.app.healthyremidersystem.Helper;
+import com.app.healthyremidersystem.presentation.notification.Alarm;
+
 import java.util.List;
 import java.util.Random;
 
@@ -105,6 +110,29 @@ public class Medicine {
             return MedicineStatus.ACCEPTED;
         } else {
             return MedicineStatus.CARELESS;
+        }
+    }
+
+    public void setMedicineAlarms(Context context) {
+        for (int i = 0; i < getScheduledTimes().size(); i++) {
+            ScheduledTime scheduledTime = getScheduledTimes().get(i);
+            int[] hourMinutes = new Helper(context).splitTimeIntoHourAndMinute(scheduledTime.getTime());
+
+            Alarm alarm = new Alarm(i, 0, 0, ScheduledTime.Day.valueOf(scheduledTime.getDay()).getDayValue(),
+                    hourMinutes[0], hourMinutes[1],
+                    getMedicineName(),
+                    getMedicineId(),
+                    getMedicineId() + i,
+                    true);
+            alarm.schedule(context);
+        }
+    }
+
+    public void removeMedicineAlarms(Context context) {
+        for (int i = 0; i < getScheduledTimes().size(); i++) {
+            ScheduledTime scheduledTime = getScheduledTimes().get(i);
+            Alarm alarm = new Alarm();
+            alarm.cancelAlarm(context, getMedicineId() + i);
         }
     }
 

@@ -77,7 +77,7 @@ public class MedicineRepositoryImpl implements MedicineRepository {
         databaseReference.child(userId)
                 .child("medicines")
                 .child(medicineId)
-                .child("times")
+                .child("scheduledTimes")
                 .child(String.valueOf(timePosition))
                 .updateChildren(updatedStatus);
     }

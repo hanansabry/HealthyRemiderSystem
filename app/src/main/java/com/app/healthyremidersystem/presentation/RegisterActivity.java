@@ -8,7 +8,7 @@ import android.widget.Toast;
 import com.app.healthyremidersystem.Helper;
 import com.app.healthyremidersystem.R;
 import com.app.healthyremidersystem.model.ScheduledTime;
-import com.app.healthyremidersystem.presentation.notification.AlarmController;
+import com.app.healthyremidersystem.presentation.notification.Alarm;
 import com.app.healthyremidersystem.presentation.viewmodels.AddMedicineReminderViewModel;
 import com.app.healthyremidersystem.presentation.viewmodels.RegisterViewModel;
 import com.google.android.material.textfield.TextInputEditText;
@@ -121,17 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
         addMedicineReminderViewModel.addNewMedicineReminder(helper.getUserId(), "Water", null, 7, timesPerDay, allScheduledTimes, 6);
         addMedicineReminderViewModel.getRetrievedMedicine().observe(this, water -> {
             //DONE: set alarms for water
-            AlarmController alarmController = new AlarmController(this);
-            for (int i = 0; i < water.getScheduledTimes().size(); i++) {
-                ScheduledTime scheduledTime = water.getScheduledTimes().get(i);
-                int[] hourMinutes = new Helper(this).splitTimeIntoHourAndMinute(scheduledTime.getTime());
-                alarmController.setRepeatingAlarm(i, ScheduledTime.Day.valueOf(scheduledTime.getDay()).getDayValue(),
-                        hourMinutes[0],
-                        hourMinutes[1],
-                        water.getMedicineName(),
-                        water.getMedicineId(),
-                        water.getMedicineId()+i);
-            }
+            water.setMedicineAlarms(this);
         });
     }
 

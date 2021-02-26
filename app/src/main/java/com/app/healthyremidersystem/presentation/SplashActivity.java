@@ -23,12 +23,5 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> {
             startActivity(new Intent(SplashActivity.this, StartActivity.class));
         }, SPLASH_TIME_OUT);
-
-        ComponentName receiver = new ComponentName(this, BootReceiver.class);
-        PackageManager pm = getPackageManager();
-        pm.setComponentEnabledSetting(receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP);
-
     }
 }

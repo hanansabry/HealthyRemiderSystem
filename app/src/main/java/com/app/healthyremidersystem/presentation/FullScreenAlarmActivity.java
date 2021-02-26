@@ -1,8 +1,10 @@
 package com.app.healthyremidersystem.presentation;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import com.app.healthyremidersystem.Helper;
 import com.app.healthyremidersystem.R;
 import com.app.healthyremidersystem.data.MedicineRepository;
 import com.app.healthyremidersystem.domain.MedicineRepositoryImpl;
+import com.app.healthyremidersystem.presentation.notification.AlarmService;
 
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
@@ -22,7 +25,7 @@ import butterknife.OnClick;
 public class FullScreenAlarmActivity extends AppCompatActivity {
 
     private static final String TAG = FullScreenAlarmActivity.class.getSimpleName();
-    private String medicineId;
+    private int medicineId;
     private int timePosition;
 
     @BindView(R.id.timeTextView)
@@ -36,7 +39,7 @@ public class FullScreenAlarmActivity extends AppCompatActivity {
         turnScreenOnAndKeyguardOff();
 
         Intent intent = getIntent();
-        medicineId = intent.getStringExtra(Constants.ALERT_ID);
+        medicineId = intent.getIntExtra(Constants.ALERT_TYPE_ID, 0);
         timePosition = intent.getIntExtra(Constants.POSITION, 0);
         String time = intent.getStringExtra(Constants.TIME);
         timeTextView.setText(time);
@@ -46,14 +49,20 @@ public class FullScreenAlarmActivity extends AppCompatActivity {
 
     @OnClick(R.id.doneButton)
     public void onDoneClicked() {
+        Intent intentService = new Intent(getApplicationContext(), AlarmService.class);
+        getApplicationContext().stopService(intentService);
+
         MedicineRepository medicineRepository = new MedicineRepositoryImpl();
         medicineRepository.updateScheduledTimeStatus(new Helper(this).getUserId(), String.valueOf(medicineId), timePosition, true);
+
         Toast.makeText(this, "Good job!", Toast.LENGTH_SHORT).show();
         finish();
     }
 
     @OnClick(R.id.ignoreButton)
     public void onIgnoreClicked() {
+        Intent intentService = new Intent(getApplicationContext(), AlarmService.class);
+        getApplicationContext().stopService(intentService);
         finish();
     }
 

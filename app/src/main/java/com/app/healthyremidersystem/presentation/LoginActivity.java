@@ -13,8 +13,13 @@ import android.widget.Toast;
 
 import com.app.healthyremidersystem.Helper;
 import com.app.healthyremidersystem.R;
+import com.app.healthyremidersystem.domain.RescheduleAlarmsRepositoryImpl;
+import com.app.healthyremidersystem.model.Medicine;
 import com.app.healthyremidersystem.presentation.viewmodels.LoginViewModel;
+import com.app.healthyremidersystem.presentation.viewmodels.RescheduleAlarmsViewModel;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -40,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Helper(this).saveUserIdLocally(userId);
                 startActivity(new Intent(this, MainActivity.class));
                 //TODO: get all old medicines and make alert for them
+                rescheduleAlarms();
             } else {
                 Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
             }
@@ -49,6 +55,15 @@ public class LoginActivity extends AppCompatActivity {
         });
         loginViewModel.getPasswordError().observe(this, error -> {
             passwordEditText.setError(error);
+        });
+    }
+
+    private void rescheduleAlarms() {
+        RescheduleAlarmsViewModel rescheduleAlarmsViewModel = new RescheduleAlarmsViewModel(new Helper(this).getUserId());
+        rescheduleAlarmsViewModel.rescheduleAlarms(medicines -> {
+            for (Medicine medicine : medicines) {
+                medicine.setMedicineAlarms(this);
+            }
         });
     }
 

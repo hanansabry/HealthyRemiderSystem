@@ -14,7 +14,7 @@ import com.app.healthyremidersystem.R;
 import com.app.healthyremidersystem.model.Medicine;
 import com.app.healthyremidersystem.model.ScheduledTime;
 import com.app.healthyremidersystem.presentation.adapters.ScheduledTimesAdapter;
-import com.app.healthyremidersystem.presentation.notification.AlarmController;
+import com.app.healthyremidersystem.presentation.notification.Alarm;
 import com.app.healthyremidersystem.presentation.viewmodels.AddMedicineReminderViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
@@ -67,7 +67,7 @@ public class AddMedicineReminderActivity extends AppCompatActivity implements Sc
             if (retrievedMedicine != null) {
                 Toast.makeText(this, "New medicine reminder is added", Toast.LENGTH_SHORT).show();
                 //add alarms for this medicine
-                setMedicineAlarms(retrievedMedicine);
+                retrievedMedicine.setMedicineAlarms(this);
                 finish();
             } else {
                 Toast.makeText(this, "Something wrong is happened, please try again later", Toast.LENGTH_SHORT).show();
@@ -85,20 +85,6 @@ public class AddMedicineReminderActivity extends AppCompatActivity implements Sc
         addMedicineReminderViewModel.getNumPerDayError().observe(this, error -> {
             editTextNumPerDays.setError(error);
         });
-    }
-
-    private void setMedicineAlarms(Medicine retrievedMedicine) {
-        AlarmController alarmController = new AlarmController(this);
-        for (int i = 0; i < retrievedMedicine.getScheduledTimes().size(); i++) {
-            ScheduledTime scheduledTime = retrievedMedicine.getScheduledTimes().get(i);
-            int[] hourMinutes = new Helper(this).splitTimeIntoHourAndMinute(scheduledTime.getTime());
-            alarmController.setRepeatingAlarm(i, ScheduledTime.Day.valueOf(scheduledTime.getDay()).getDayValue(),
-                    hourMinutes[0],
-                    hourMinutes[1],
-                    retrievedMedicine.getMedicineName(),
-                    retrievedMedicine.getMedicineId(),
-                    retrievedMedicine.getMedicineId()+i);
-        }
     }
 
     @OnClick(R.id.btnAllReminders)

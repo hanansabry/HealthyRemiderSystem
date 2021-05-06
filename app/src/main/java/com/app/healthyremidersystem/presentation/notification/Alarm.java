@@ -13,8 +13,8 @@ import com.app.healthyremidersystem.Constants;
 import java.util.Calendar;
 
 public class Alarm {
-//    private static final long WEEKLY = 7 * 24 * 60 * 60 * 1000;
-    private static final long WEEKLY = 5 * 60 * 1000;
+    private static final long WEEKLY = 7 * 24 * 60 * 60 * 1000;
+//    private static final long WEEKLY = 5 * 60 * 1000;
 
     private int position;
     private int alarmId;

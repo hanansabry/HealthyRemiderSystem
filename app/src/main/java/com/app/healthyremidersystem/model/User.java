@@ -11,6 +11,9 @@ public class User {
     private double height;
     private String gender;
 
+    public User() {
+    }
+
     public User(String fullName, String phone, String email, String password, double weight, double height, String gender) {
         this.fullName = fullName;
         this.email = email;

@@ -1,9 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".presentation.DrinkingWaterActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/ic_back_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="How Much Water Should You Drink Every Day?"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/waterEquation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bar"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:text="Water (in litres) to drink a day = Your Weight (in Kg) multiplied by 0.033. For example, if you are 60kg, you should drink about 2 litres of water every single day. At 90kg, you'll around about 3 litres of water. All you need to do is multiply 0.033 to your weight in Kg"/>
+
+
+    <ImageView
+        android:id="@+id/water_icon_imgview"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/water_icon"
+        android:layout_marginBottom="32dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="You need to drink daily : "
+        android:layout_marginStart="8dp"
+        android:layout_above="@id/litresTextView"
+        android:layout_centerHorizontal="true"/>
+
+
+    <TextView
+        android:id="@+id/litresTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2.52 L"
+        android:layout_below="@id/water_icon_imgview"
+        android:layout_centerHorizontal="true"
+        android:textSize="110sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/white"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/loadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loading..."
+        android:layout_below="@id/water_icon_imgview"
+        android:layout_centerHorizontal="true"
+        android:textSize="64sp"
+        android:textStyle="bold"
+        android:layout_marginTop="36dp"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

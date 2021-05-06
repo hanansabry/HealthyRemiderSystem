@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "746156699358",
+    "project_id": "healthy-reminder-system",
+    "storage_bucket": "healthy-reminder-system.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746156699358:android:0a512421e0f863ca6d9c4f",
+        "android_client_info": {
+          "package_name": "com.app.healthyremidersystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746156699358-l2e5kqk932ikrb9vr5167bitd8nhnfc0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.healthyremidersystem",
+            "certificate_hash": "51247baa05eff6421afb67f99b356fa2ad164748"
+          }
+        },
+        {
+          "client_id": "746156699358-r6tltgaosgukj1ddualgtpqg4iuuvuui.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj4i-YXCG-RG8b7Y4X4RrbURmsC9cOoH0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "746156699358-r6tltgaosgukj1ddualgtpqg4iuuvuui.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,4 +9,5 @@ public interface UserRepository {
     void login(String email, String password, MutableLiveData<String> userId);
     void register(User user, MutableLiveData<User> addedUser);
     void addUserToDB(User user, MutableLiveData<User> userSuccess);
+    void getUserDataById(String userId, MutableLiveData<User> returnedUser);
 }

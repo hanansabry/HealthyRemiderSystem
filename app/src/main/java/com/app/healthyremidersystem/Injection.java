@@ -16,6 +16,7 @@ import com.app.healthyremidersystem.domain.usecases.LoginUseCase;
 import com.app.healthyremidersystem.domain.usecases.RegisterUseCase;
 import com.app.healthyremidersystem.domain.usecases.RemoveMedicineUseCase;
 import com.app.healthyremidersystem.domain.usecases.RetrieveMedicinesRemindersUseCase;
+import com.app.healthyremidersystem.domain.usecases.RetrieveUserUseCase;
 
 public class Injection {
     public static AddAppointmentUseCase getAddAppointmentUseCase() {
@@ -64,5 +65,9 @@ public class Injection {
 
     public static RemoveMedicineUseCase getRemoveMedicineUseCase() {
         return new RemoveMedicineUseCase(getMedicineRepository());
+    }
+
+    public static RetrieveUserUseCase getRetrieveUserUseCase() {
+        return new RetrieveUserUseCase(getUserRepository());
     }
 }

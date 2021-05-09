@@ -41,7 +41,7 @@ public class WeeklyReportAdapter extends RecyclerView.Adapter<WeeklyReportAdapte
         Medicine medicine = medicineList.get(position);
         holder.medicineNameTextView.setText(medicine.getMedicineName());
         holder.medicineImageVIew.setImageURI(Uri.parse(medicine.getMedicineImageUri()));
-        holder.percentTextView.setText(String.format(Locale.US, "Taken: %d/%d", medicine.getTakenNumber(), medicine.getScheduledTimes().size()));
+        holder.percentTextView.setText(String.format(Locale.US, "Taken: %.0f/%d", medicine.getTakenNumber(), medicine.getScheduledTimes().size()));
         holder.remainingTextView.setText(String.format(Locale.US, "Remaining: %d/%d", medicine.getRemainingNumber(), medicine.getScheduledTimes().size()));
         holder.medicineStatusTextView.setText(medicine.getMedicineStatus().name());
         if (medicine.getMedicineStatus().equals(Medicine.MedicineStatus.PERFECT)) {

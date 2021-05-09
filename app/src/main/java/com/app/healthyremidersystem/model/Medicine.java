@@ -92,7 +92,7 @@ public class Medicine {
         this.scheduledTimes = scheduledTimes;
     }
 
-    public int getTakenNumber() {
+    public double getTakenNumber() {
         int takenNumber = 0;
         for (ScheduledTime time : scheduledTimes) {
             if (time.getStatus()) {
@@ -113,7 +113,7 @@ public class Medicine {
     }
 
     public MedicineStatus getMedicineStatus() {
-        int percent = (getTakenNumber() / scheduledTimes.size()) * 100;
+        double percent = getTakenNumber() / scheduledTimes.size() * 100;
         if (percent <= 100 && percent >= 90) {
             return MedicineStatus.PERFECT;
         } else if (percent < 90 && percent >= 75) {

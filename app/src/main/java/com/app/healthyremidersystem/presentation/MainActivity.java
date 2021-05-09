@@ -7,6 +7,7 @@ import butterknife.OnClick;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 
 import com.app.healthyremidersystem.Helper;
 import com.app.healthyremidersystem.R;
@@ -29,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.btnAllReminders)
     public void onAllRemindersClicked() {
         startActivity(new Intent(this, AllMedicinesRemindersActivity.class));
+    }
+
+    @OnClick(R.id.btnAddHistory)
+    public void onAddHistoryClicked() {
+        startActivity(new Intent(this, MedicalHistoryActivity.class));
     }
 
     @OnClick(R.id.btnLogout)
@@ -64,5 +70,11 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.drinkingWaterCardView)
     public void onDrinkingWaterClicked() {
         startActivity(new Intent(this, DrinkingWaterActivity.class));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
     }
 }

@@ -1,14 +1,17 @@
 package com.app.healthyremidersystem;
 
 import com.app.healthyremidersystem.data.AppointmentRepository;
+import com.app.healthyremidersystem.data.MedicalHistoryRepository;
 import com.app.healthyremidersystem.data.MedicineRepository;
 import com.app.healthyremidersystem.data.UserRepository;
 import com.app.healthyremidersystem.data.WeeklyReportRepository;
 import com.app.healthyremidersystem.domain.AppointmentRepositoryImpl;
+import com.app.healthyremidersystem.domain.MedicalHistoryRepositoryImpl;
 import com.app.healthyremidersystem.domain.MedicineRepositoryImpl;
 import com.app.healthyremidersystem.domain.UserRepositoryImpl;
 import com.app.healthyremidersystem.domain.WeeklyReportRepositoryImpl;
 import com.app.healthyremidersystem.domain.usecases.AddAppointmentUseCase;
+import com.app.healthyremidersystem.domain.usecases.AddIllnessHistoryUseCase;
 import com.app.healthyremidersystem.domain.usecases.AddMedicineReminderUseCase;
 import com.app.healthyremidersystem.domain.usecases.AddUserUseCase;
 import com.app.healthyremidersystem.domain.usecases.GetWeeklyReportUseCase;
@@ -69,5 +72,13 @@ public class Injection {
 
     public static RetrieveUserUseCase getRetrieveUserUseCase() {
         return new RetrieveUserUseCase(getUserRepository());
+    }
+
+    public static AddIllnessHistoryUseCase getIllnessHistoryUseCase() {
+        return new AddIllnessHistoryUseCase(getMedicalHistoryRepository());
+    }
+
+    private static MedicalHistoryRepository getMedicalHistoryRepository() {
+        return new MedicalHistoryRepositoryImpl();
     }
 }

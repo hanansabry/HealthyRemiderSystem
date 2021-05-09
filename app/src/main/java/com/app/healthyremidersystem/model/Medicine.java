@@ -102,6 +102,16 @@ public class Medicine {
         return takenNumber;
     }
 
+    public int getRemainingNumber() {
+        int remainNumber = 0;
+        for (ScheduledTime time : scheduledTimes) {
+            if (!time.getStatus()) {
+                remainNumber++;
+            }
+        }
+        return remainNumber;
+    }
+
     public MedicineStatus getMedicineStatus() {
         int percent = (getTakenNumber() / scheduledTimes.size()) * 100;
         if (percent <= 100 && percent >= 90) {

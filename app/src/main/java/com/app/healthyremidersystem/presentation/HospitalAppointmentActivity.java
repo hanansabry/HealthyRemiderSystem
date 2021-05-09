@@ -55,7 +55,7 @@ public class HospitalAppointmentActivity extends AppCompatActivity {
                 setAppointmentAlert(appointment);
                 finish();
             } else {
-                Toast.makeText(this, "Somthing wrong is happened, please try again later", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Something wrong is happened, please try again later", Toast.LENGTH_SHORT).show();
             }
         });
         addAppointmentViewModel.getDateError().observe(this, error -> {
